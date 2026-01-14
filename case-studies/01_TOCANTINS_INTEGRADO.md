@@ -171,7 +171,7 @@ O projeto nasceu da necessidade de democratizar acesso a indicadores de desenvol
 **Problema**: Após 3-4 horas de código, Dev (IA) começava a "esquecer" decisões iniciais
 
 **Solução via Framework**:
-- Handoffs a cada 1.5-2h forçaram documentação frequente
+- Handoffs a cada 1.5-2h forçaram documentação frequente. *Ver, por exemplo, o `Handoff da Sessão 5` que captura o estado exato da implementação dos componentes do dashboard.*
 - Próxima sessão sempre começava com "ler handoff anterior"
 - Taxa de retrabalho caiu de ~30% (estimativa pré-framework) para ~12%
 
@@ -182,7 +182,7 @@ O projeto nasceu da necessidade de democratizar acesso a indicadores de desenvol
 **Solução via Framework**:
 - Papel de Dev foi limitado a "implementação dentro de spec"
 - Decisões não-triviais geravam "pergunta ao CTO"
-- ADRs garantiram que trade-offs foram conscientes
+- ADRs garantiram que trade-offs foram conscientes. *A decisão de usar `react-select` em vez de um dropdown nativo, por exemplo, foi documentada num ADR para justificar a adição de uma nova dependência.*
 
 ### Desafio 3: CEO Perdendo Visibilidade
 
@@ -198,7 +198,7 @@ O projeto nasceu da necessidade de democratizar acesso a indicadores de desenvol
 **Problema**: Erro de hydration do Next.js levou 3 tentativas para resolver
 
 **Solução via Framework**:
-- Cada tentativa documentada em handoff
+- Cada tentativa documentada em handoff. *O `Handoff de Debugging do Erro de Hydration` mostra o histórico de 3 tentativas, o que foi crucial para a solução final.*
 - Histórico de tentativas evitou repetir soluções fracassadas
 - CTO pôde analisar padrão e sugerir abordagem diferente
 

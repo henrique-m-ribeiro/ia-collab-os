@@ -42,6 +42,8 @@ O **IA Collab OS** é um framework de governança que simula uma estrutura organ
 
 ## Começando
 
+Para um guia prático e rápido, veja o nosso [**QUICKSTART.md**](./QUICKSTART.md).
+
 ### 1. Entenda os Fundamentos
 
 - Leia [PRINCIPLES.md](./PRINCIPLES.md) para compreender os 5 princípios fundamentais
