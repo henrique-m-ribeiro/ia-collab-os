@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            padding: 60px;
+            display: flex;
+            gap: 60px;
+        }
+        .left-panel {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid #E0E0E0;
+            padding-right: 40px;
+        }
+        .title-block {
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 56px;
+            font-weight: 900;
+            color: #000000;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+        .intro {
+            font-size: 20px;
+            line-height: 1.5;
+            color: #555555;
+            font-weight: 400;
+        }
+        .decorative-line {
+            width: 80px;
+            height: 8px;
+            background-color: #FF4400;
+            margin-top: 40px;
+        }
+        .right-panel {
+            width: 65%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .principle-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .principle-item.full-width {
+            grid-column: 1 / -1;
+            flex-direction: row;
+            align-items: center;
+            border-top: 2px solid #F0F0F0;
+            padding-top: 20px;
+        }
+        .p-number {
+            font-size: 32px;
+            font-weight: 900;
+            color: #0055FF;
+            margin-bottom: 10px;
+        }
+        .principle-item.full-width .p-number {
+            margin-bottom: 0;
+            margin-right: 20px;
+            font-size: 48px;
+        }
+        .p-content {
+            display: flex;
+            flex-direction: column;
+        }
+        .p-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 8px;
+        }
+        .p-desc {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #333333;
+        }
+        /* Specific tweak for the 5th item to make it stand out */
+        .principle-item.full-width .p-title {
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+        .principle-item.full-width .p-desc {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="left-panel">
+            <div class="title-block">
+                <h1 class="title">Os 5<br>Princípios<br>Fundamentais</h1>
+                <div class="decorative-line"></div>
+            </div>
+            <p class="intro">
+                Estes princípios não são apenas regras, mas manifestações de uma filosofia epistemológica sobre como humanos e IAs devem colaborar.
+            </p>
+        </div>
+        
+        <div class="right-panel">
+            <!-- Item 1 -->
+            <div class="principle-item">
+                <div class="p-number">01</div>
+                <div class="p-content">
+                    <h3 class="p-title">Documentação é Contrato</h3>
+                    <p class="p-desc">Toda decisão relevante deve ser documentada em artefatos formais para garantir rastreabilidade.</p>
+                </div>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="principle-item">
+                <div class="p-number">02</div>
+                <div class="p-content">
+                    <h3 class="p-title">Escopo Limitado</h3>
+                    <p class="p-desc">Cada sessão tem objetivo delimitado com critérios verificáveis para evitar perda de foco.</p>
+                </div>
+            </div>
+            
+            <!-- Item 3 -->
+            <div class="principle-item">
+                <div class="p-number">03</div>
+                <div class="p-content">
+                    <h3 class="p-title">Decisões Explícitas</h3>
+                    <p class="p-desc">Escolhas técnicas são documentadas com contexto e justificativa (ADRs).</p>
+                </div>
+            </div>
+            
+            <!-- Item 4 -->
+            <div class="principle-item">
+                <div class="p-number">04</div>
+                <div class="p-content">
+                    <h3 class="p-title">CEO como Orquestrador</h3>
+                    <p class="p-desc">O humano mantém a coerência estratégica e a visão de negócio em todos os momentos.</p>
+                </div>
+            </div>
+            
+            <!-- Item 5 (Full Width) -->
+            <div class="principle-item full-width">
+                <div class="p-number">05</div>
+                <div class="p-content">
+                    <h3 class="p-title">Handoffs Completos</h3>
+                    <p class="p-desc">Toda transição preserva decisões, estado e próximos passos, garantindo continuidade perfeita.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

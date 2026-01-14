@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            border-bottom: 4px solid #000000;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+        .intro {
+            font-size: 24px;
+            line-height: 1.4;
+            color: #333333;
+            margin-bottom: 60px;
+            max-width: 900px;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            flex-grow: 1;
+        }
+        .col {
+            display: flex;
+            flex-direction: column;
+        }
+        .col-header {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+        .col-ideal .col-header { color: #0055FF; }
+        .col-overkill .col-header { color: #FF4400; }
+        
+        .indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-size: 24px;
+            font-weight: 900;
+            color: #FFFFFF;
+        }
+        .col-ideal .indicator { background-color: #0055FF; }
+        .col-overkill .indicator { background-color: #FF4400; }
+
+        /* Reduced vertical spacing inside lists to save height (keeps fonts intact) */
+        .criteria-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* reduced from 25px */
+        }
+        .criteria-item {
+            font-size: 22px;
+            color: #000000;
+            padding-left: 20px;
+            border-left: 3px solid #E0E0E0;
+            line-height: 1.3;
+        }
+        .col-ideal .criteria-item { border-left-color: #0055FF; }
+        .col-overkill .criteria-item { border-left-color: #FF4400; }
+        
+        .criteria-bold {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .criteria-desc {
+            font-size: 18px;
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Quando Usar o IA Collab OS</h1>
+        </div>
+        
+        <p class="intro">
+            O framework não é uma solução universal. Ele brilha em contextos onde a preservação de contexto e a rastreabilidade são críticas para o sucesso.
+        </p>
+        
+        <div class="comparison-grid">
+            <!-- Ideal Column -->
+            <div class="col col-ideal">
+                <div class="col-header">
+                    <span class="indicator">&check;</span>
+                    Ideal Para
+                </div>
+                <div class="criteria-list">
+                    <div class="criteria-item">
+                        <span class="criteria-bold">Projetos de Médio/Longo Prazo</span>
+                        <span class="criteria-desc">Duração superior a 1 semana ou múltiplos sprints.</span>
+                    </div>
+                    <div class="criteria-item">
+                        <span class="criteria-bold">Sistemas Complexos</span>
+                        <span class="criteria-desc">Múltiplas decisões arquiteturais e componentes.</span>
+                    </div>
+                    <div class="criteria-item">
+                        <span class="criteria-bold">Equipas Distribuídas</span>
+                        <span class="criteria-desc">Necessidade de comunicação assíncrona clara.</span>
+                    </div>
+                    <div class="criteria-item">
+                        <span class="criteria-bold">Rastreabilidade</span>
+                        <span class="criteria-desc">Necessidade de auditoria de decisões técnicas.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overkill Column -->
+            <div class="col col-overkill">
+                <div class="col-header">
+                    <span class="indicator">!</span>
+                    Pode ser Exagerado Para
+                </div>
+                <div class="criteria-list">
+                    <div class="criteria-item">
+                        <span class="criteria-bold">Scripts Únicos</span>
+                        <span class="criteria-desc">Automações simples de arquivo único.</span>
+                    </div>
+                    <div class="criteria-item">
+                        <span class="criteria-bold">Prototipagem Rápida</span>
+                        <span class="criteria-desc">Hackathons ou testes de conceito de &lt; 1 dia.</span>
+                    </div>
+                    <div class="criteria-item">
+                        <span class="criteria-bold">Tarefas Triviais</span>
+                        <span class="criteria-desc">Ajustes visuais simples ou correções de texto.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

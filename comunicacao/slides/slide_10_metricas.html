@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            border-bottom: 4px solid #000000;
+            padding-bottom: 20px;
+            margin-bottom: 40px; /* reduced from 60 to save vertical space */
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            color: #555555;
+            max-width: 800px;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 40px; /* reduced from 60 to bring rows closer */
+            flex-grow: 1;
+        }
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            border-top: 6px solid #0055FF;
+            padding-top: 20px;
+        }
+        .metric-item.warning {
+            border-top-color: #FF4400;
+        }
+        .metric-value {
+            font-size: 96px;
+            font-weight: 900;
+            color: #000000;
+            line-height: 1;
+            margin-bottom: 10px;
+            letter-spacing: -4px;
+        }
+        .metric-label {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 5px;
+        }
+        .metric-desc {
+            font-size: 16px;
+            color: #666666;
+            font-weight: 400;
+        }
+        /* Layout adjustment for the last two items to center them visually in the grid structure */
+        .metric-item:nth-child(4) {
+            grid-column: 1 / 2;
+        }
+        .metric-item:nth-child(5) {
+            grid-column: 2 / 3;
+        }
+        /* Add a summary block in the last slot */
+        .summary-block {
+            grid-column: 3 / 4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #F4F4F4;
+            padding: 30px;
+        }
+        .summary-text {
+            font-size: 18px;
+            color: #333333;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Métricas de Sucesso</h1>
+            <p class="subtitle">Indicadores claros permitem avaliar se a metodologia está a funcionar e identificar desvios precocemente.</p>
+        </div>
+        
+        <div class="metrics-grid">
+            <!-- Row 1 -->
+            <div class="metric-item">
+                <div class="metric-value">≥ 5</div>
+                <div class="metric-label">Handoffs</div>
+                <div class="metric-desc">Por semana de trabalho</div>
+            </div>
+            
+            <div class="metric-item">
+                <div class="metric-value">≥ 2</div>
+                <div class="metric-label">ADRs</div>
+                <div class="metric-desc">Por sprint (decisões técnicas)</div>
+            </div>
+            
+            <div class="metric-item">
+                <div class="metric-value">100%</div>
+                <div class="metric-label">Escopo Claro</div>
+                <div class="metric-desc">Sessões com objetivo definido</div>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="metric-item warning">
+                <div class="metric-value">&lt; 20%</div>
+                <div class="metric-label">Retrabalho</div>
+                <div class="metric-desc">Taxa máxima aceitável</div>
+            </div>
+            
+            <div class="metric-item warning">
+                <div class="metric-value">&lt; 5</div>
+                <div class="metric-label">Bugs</div>
+                <div class="metric-desc">Em fase de validação</div>
+            </div>
+            
+            <div class="summary-block">
+                <p class="summary-text">
+                    "O framework define métricas objetivas para monitorizar a saúde do processo e servir como sinais de alerta."
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            padding: 60px 36px 20px 36px; /* keep top padding 60px, reduce sides and bottom */
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            grid-template-rows: auto auto; /* make rows fit content */
+            gap: 24px; /* reduced gap */
+        }
+        .header {
+            grid-column: 1 / -1;
+            border-bottom: 4px solid #000000;
+            padding-bottom: 16px; /* slightly reduced */
+            margin-bottom: 12px; /* reduced spacing after header */
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+        .steps-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* avoid stretching items across the whole column */
+            padding-right: 24px; /* reduced */
+            gap: 24px; /* spacing between step items */
+        }
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0; /* handled by gap */
+        }
+        .step-number {
+            font-size: 64px;
+            font-weight: 900;
+            color: #0055FF;
+            line-height: 0.8;
+            margin-right: 20px; /* reduced */
+            min-width: 60px;
+        }
+        .step-content {
+            display: flex;
+            flex-direction: column;
+        }
+        .step-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 8px; /* reduced */
+        }
+        .step-desc {
+            font-size: 20px;
+            color: #555555;
+            line-height: 1.4;
+        }
+        .resources-col {
+            background-color: #000000;
+            color: #FFFFFF;
+            padding: 24px; /* reduced */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* don't center to avoid growing */
+            position: relative;
+        }
+        .resources-col::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background-color: #FF4400;
+        }
+        .res-title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 20px; /* reduced */
+            text-transform: uppercase;
+            border-bottom: 2px solid #333333;
+            padding-bottom: 12px; /* reduced */
+        }
+        .res-item {
+            margin-bottom: 18px; /* reduced */
+        }
+        .res-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #888888;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .res-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 1.4;
+        }
+        .res-link {
+            color: #0055FF;
+            text-decoration: none;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Como Começar</h1>
+        </div>
+        
+        <div class="steps-col">
+            <div class="step-item">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3 class="step-title">Leia os Fundamentos</h3>
+                    <p class="step-desc">Comece pelos arquivos <strong>PRINCIPLES.md</strong> e <strong>METHODOLOGY.md</strong> para entender a filosofia.</p>
+                </div>
+            </div>
+            
+            <div class="step-item">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3 class="step-title">Defina os Papéis</h3>
+                    <p class="step-desc">Decida explicitamente quem atuará como CEO (Humano), CTO (IA) e Dev (IA) no seu projeto.</p>
+                </div>
+            </div>
+            
+            <div class="step-item">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3 class="step-title">Use os Templates</h3>
+                    <p class="step-desc">Inicie com os templates de <strong>Handoff</strong> e <strong>ADR</strong> básicos para criar o hábito de documentação.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="resources-col">
+            <h2 class="res-title">Recursos</h2>
+            
+            <div class="res-item">
+                <span class="res-label">Repositório Oficial</span>
+                <div class="res-value">github.com/henrique-m-ribeiro/ia-collab-os</div>
+            </div>
+            
+            <div class="res-item">
+                <span class="res-label">Tutorial Prático</span>
+                <div class="res-value">Consulte o arquivo <strong>QUICKSTART.md</strong> para um guia de 30 minutos.</div>
+            </div>
+            
+            <div class="res-item">
+                <span class="res-label">Licença</span>
+                <div class="res-value">MIT (Open Source)</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

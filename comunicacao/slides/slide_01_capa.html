@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+        }
+        .left-panel {
+            width: 60%;
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #FFFFFF;
+            z-index: 2;
+        }
+        .right-panel {
+            width: 40%;
+            height: 100%;
+            position: relative;
+            background-color: #F0F0F0;
+        }
+        .title {
+            font-size: 96px;
+            font-weight: 900;
+            line-height: 0.9;
+            color: #000000;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+        .subtitle {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0055FF;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+        .tagline {
+            font-size: 24px;
+            font-weight: 400;
+            color: #333333;
+            max-width: 80%;
+            line-height: 1.4;
+            border-left: 4px solid #FF4400;
+            padding-left: 20px;
+        }
+        .author {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            font-size: 18px;
+            color: #666666;
+            font-weight: 500;
+        }
+        .image-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2); /* Swiss style often uses B&W photography */
+            mix-blend-mode: multiply;
+        }
+        .accent-block {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0055FF;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        .geometric-shape {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background-color: #FF4400;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="left-panel">
+            <h1 class="title">IA<br>COLLAB<br>OS</h1>
+            <h2 class="subtitle">Sistema Operacional de<br>Colaboração Humano-IA</h2>
+            <p class="tagline">Um framework metodológico para orquestração eficaz de equipes multiagentes</p>
+            <div class="author">Henrique M. Ribeiro & Manus AI</div>
+        </div>
+        <div class="right-panel">
+            <div class="image-container">
+                <img src="https://private-us-east-1.manuscdn.com/sessionFile/th4w17oHP8bdb0mDUNQeoa/sandbox/slides_resource_ivgvdlr3jv3n154ct2r40-0783fd60-e2b-prod-us2_1768405984782_na1fn_L2hvbWUvdWJ1bnR1L2lhLWNvbGxhYi1vcy9zbGlkZXNfaW1hZ2VzL2h1bWFuX2FpX2NvbGxhYm9yYXRpb24.jpeg?x-oss-process=image/resize,w_1560,h_1560/format,webp&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvdGg0dzE3b0hQOGJkYjBtRFVOUWVvYS9zYW5kYm94L3NsaWRlc19yZXNvdXJjZV9pdmd2ZGxyM2p2M24xNTRjdDJyNDAtMDc4M2ZkNjAtZTJiLXByb2QtdXMyXzE3Njg0MDU5ODQ3ODJfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwybGhMV052Ykd4aFlpMXZjeTl6Ykdsa1pYTmZhVzFoWjJWekwyaDFiV0Z1WDJGcFgyTnZiR3hoWW05eVlYUnBiMjQuanBlZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE1NjAsaF8xNTYwL2Zvcm1hdCx3ZWJwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=j~MPVMpFgDzolkX01UFVUZeHJskaNQfjn7v01-qdNe87MeZ4DeO66o-kX5tGEcktYAlYjJNlzZfiwSFlTAmjZwMJrPzBY2jo~vXT~oo5f~7fo-C~~WA2~sTNYMJxtJKhRITsnCPNFsvYPtZpHGOLvJbfFWlpyC08wqX1pe3~CB9DoKMlNw5p4ho87FJ2CjJLE6ADuUtpibF6sZh6KHIHTJu0B7ISqeXJjoJ9HQ1WWdCNrqsSgbKLdws1tAbaGZWsgSZQz~ItA81VkseGaRTMlVveHS6Drg0X~tJP35ZYhw~hDh0OR5FTMOUuCbvD0Sl8~CheGZwXcwOyekaSodr4lw__" alt="Human AI Collaboration">
+            </div>
+            <div class="accent-block"></div>
+            <div class="geometric-shape"></div>
+        </div>
+    </div>
+</body>
+</html>

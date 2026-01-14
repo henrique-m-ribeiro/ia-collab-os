@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            border-bottom: 4px solid #000000;
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .title-block {
+            max-width: 60%;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 20px;
+            color: #555555;
+            font-weight: 400;
+            margin-top: 10px;
+        }
+        .context-tag {
+            background-color: #000000;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 40px;
+            flex-grow: 1;
+        }
+        .metric-item {
+            border-left: 2px solid #E0E0E0;
+            padding-left: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .metric-item.highlight {
+            border-left: 6px solid #FF4400;
+        }
+        .metric-value {
+            font-size: 80px;
+            font-weight: 900;
+            color: #0055FF;
+            line-height: 1;
+            margin-bottom: 10px;
+            letter-spacing: -3px;
+        }
+        .metric-label {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000000;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .metric-context {
+            font-size: 14px;
+            color: #666666;
+        }
+        /* Special styling for the last item to make it span or stand out if needed, 
+           but here we have 5 items, so the last slot is empty. 
+           Let's use the last slot for a summary statement. */
+        .summary-block {
+            background-color: #F4F4F4;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .summary-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="title-block">
+                <h1 class="title">Caso de Estudo:<br>Tocantins Integrado</h1>
+                <p class="subtitle">Validação real do framework na criação de uma plataforma de superinteligência territorial.</p>
+            </div>
+            <div class="context-tag">Dez 2025 - Jan 2026</div>
+        </div>
+        
+        <div class="metrics-grid">
+            <!-- Metric 1 -->
+            <div class="metric-item highlight">
+                <div class="metric-value">2.5</div>
+                <div class="metric-label">Semanas</div>
+                <div class="metric-context">Tempo total até o MVP (Estimado: 3)</div>
+            </div>
+            
+            <!-- Metric 2 -->
+            <div class="metric-item">
+                <div class="metric-value">12%</div>
+                <div class="metric-label">Retrabalho</div>
+                <div class="metric-context">Redução significativa vs 30% média</div>
+            </div>
+            
+            <!-- Metric 3 -->
+            <div class="metric-item">
+                <div class="metric-value">14</div>
+                <div class="metric-label">Handoffs</div>
+                <div class="metric-context">Ciclos de transferência de contexto</div>
+            </div>
+            
+            <!-- Metric 4 -->
+            <div class="metric-item">
+                <div class="metric-value">04</div>
+                <div class="metric-label">ADRs</div>
+                <div class="metric-context">Decisões arquiteturais documentadas</div>
+            </div>
+            
+            <!-- Metric 5 -->
+            <div class="metric-item">
+                <div class="metric-value">0</div>
+                <div class="metric-label">Bugs Críticos</div>
+                <div class="metric-context">Em produção durante a validação</div>
+            </div>
+
+            <!-- Summary Block (6th slot) -->
+            <div class="summary-block">
+                <p class="summary-text">
+                    "A formalização dos papéis permitiu que a IA mantivesse a coerência técnica enquanto o humano focava na estratégia."
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
