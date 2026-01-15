@@ -51,7 +51,7 @@ O projeto nasceu da necessidade de democratizar acesso a indicadores de desenvol
    - ADR-001: Uso de Supabase para backend
    - ADR-002: Next.js App Router para frontend
    - ADR-003: Estrutura de dados de indicadores
-   - ADR-004: Estratégia de coleta de dados
+   - ADR-004: Sistema de Coleta Orientado a Metadados (metadata-driven)
 
 **Artefatos**:
 - `docs/sprints/sprint-1-plan.md`
@@ -131,6 +131,9 @@ O projeto nasceu da necessidade de democratizar acesso a indicadores de desenvol
 |---------|------|------|--------|
 | **Tempo de MVP** | 3 semanas | 2.5 semanas | ✅ |
 | **Municípios cobertos** | 139 | 139 | ✅ |
+| **Indicadores implementados** | 10 | 55 | ✅ |
+| **Orquestradores n8n** | 1 | 2 | ✅ |
+| **Coleta automatizada** | Manual | Diária (3h) | ✅ |
 | **Tempo de carregamento** | <2s | ~1.5s | ✅ |
 | **Funcionalidades core** | 5 | 6 | ✅ |
 
@@ -162,6 +165,162 @@ O projeto nasceu da necessidade de democratizar acesso a indicadores de desenvol
 
 **Resultado**: Fácil adicionar novos indicadores sem mudanças estruturais
 
+### 4. Sistema de Coleta Orientado a Metadados (ADR-004)
+
+**Contexto**: Sistema inicial tinha 2 indicadores hardcoded em workflows n8n. Cada novo indicador exigia reescrever código do workflow.
+
+**Problema**: Escalabilidade zero - adicionar os 55+ indicadores planejados seria inviável.
+
+**Decisão**: Implementar arquitetura metadata-driven com Indicator Dictionary
+
+**Solução implementada**:
+1. **Indicator Dictionary** - Tabela PostgreSQL central com:
+   - Metadados do indicador (code, name, description, dimension)
+   - Metadados de coleta (source_name, api_endpoint, api_params)
+   - Controle de periodicidade (periodicity, last_ref_date, next_collection_date)
+   - Flags de ativação (is_active, collection_method)
+
+2. **Orquestrador de Coleta** - Workflow n8n que:
+   - Executa diariamente às 3h (cron)
+   - Consulta view `v_indicators_pending_collection`
+   - Agrupa indicadores por fonte de dados
+   - Dispara workflows especialistas via webhook
+
+3. **Workflows Especialistas** - Workflows que:
+   - Recebem lista de indicadores + metadados via payload
+   - Constroem URLs dinamicamente (ex: substituem `{ibge_code}`)
+   - Executam coleta em loop para 139 municípios
+   - Fazem UPSERT em `indicator_values`
+   - Atualizam `indicator_dictionary` com datas de coleta
+
+**Resultado**:
+- ✅ **Escalabilidade 25x**: De 2 para 55+ indicadores sem reescrever workflows
+- ✅ **Adicionar indicador**: 1 SQL INSERT (não tocar código)
+- ✅ **Múltiplos orquestradores**: Separação clara entre análise e coleta
+- ✅ **Auditabilidade**: `last_ref_date` e `last_update_date` por indicador
+- ✅ **Flexibilidade**: Diferentes periodicidades (diária, mensal, anual, sob demanda)
+
+**Impacto no framework**: Este padrão (metadata-driven architecture) mostrou-se reutilizável para qualquer sistema que precise escalar configurações sem deploys.
+
+---
+
+## Padrões Arquiteturais Descobertos
+
+Durante o desenvolvimento, identificamos padrões reutilizáveis que transcendem este projeto específico:
+
+### Padrão 1: Metadata-Driven Architecture
+
+**Quando usar**:
+- Sistema precisa ser configurável sem deploys
+- Adicionar funcionalidades novas deve ser trivial
+- Escalabilidade horizontal (muitas variações do mesmo padrão)
+
+**Como implementar**:
+1. Identifique o que varia (ex: indicadores, fontes de dados, regras de negócio)
+2. Crie tabela de metadados com todas as configurações necessárias
+3. Código/workflows leem metadados em runtime
+4. Adicionar novo item = INSERT na tabela (não tocar código)
+
+**Aplicação no Tocantins**:
+- Antes: 2 indicadores hardcoded
+- Depois: 55 indicadores em `indicator_dictionary`
+- Ganho: Adicionar indicador = 1 SQL INSERT (0 linhas de código)
+
+**Trade-offs**:
+- ✅ Escalabilidade extrema
+- ✅ Configuração sem deploy
+- ❌ Complexidade inicial maior (precisa design da tabela de metadados)
+- ❌ Debug menos óbvio (lógica em dados, não código)
+
+### Padrão 2: Multiple Orchestrators by Responsibility
+
+**Quando usar**:
+- Orquestrador único com >15 nós
+- Responsabilidades distintas (ex: análise em tempo real vs coleta batch)
+- Schedules diferentes (sob demanda vs cron)
+
+**Sinais de alerta**:
+- "Este orquestrador faz análise E coleta E notificações..."
+- Workflow difícil de entender ou manter
+- Mudanças em uma responsabilidade quebram outra
+
+**Aplicação no Tocantins**:
+- Antes: `orchestrator.json` (análise + coleta misturados)
+- Depois:
+  - `analysis-orchestrator.json` - Webhook sob demanda, responde consultas
+  - `data-collection-orchestrator.json` - Cron diário 3h, atualiza dados
+- Ganho: Clareza de responsabilidades, schedules independentes, falhas isoladas
+
+**Lição**: Quando orquestrador excede 15 nós ou mistura responsabilidades → considerar separação
+
+### Padrão 3: Orchestrator-Specialist Pattern (Webhooks)
+
+**Quando usar**:
+- Sistema com múltiplas fontes/agentes especializados
+- Coordenação centralizada necessária
+- Execuções paralelas ou assíncronas
+
+**Como implementar**:
+1. **Orquestrador**: Workflow que coordena e consolida
+2. **Especialistas**: Workflows acionados via webhook
+3. **Payload**: Metadados necessários para execução
+4. **Consolidação**: Orquestrador agrega resultados
+
+**Aplicação no Tocantins**:
+- Orquestrador de coleta consulta indicadores pendentes
+- Agrupa por fonte (IBGE, INEP, MapBiomas)
+- Chama especialista correspondente via webhook com lista de indicadores
+- Especialista retorna resumo (sucessos, erros, tempo)
+- Orquestrador consolida estatísticas
+
+**Benefícios**:
+- ✅ Isolamento de falhas (erro em IBGE não quebra INEP)
+- ✅ Desenvolvimento independente de especialistas
+- ✅ Reutilização (especialista chamado por múltiplos orquestradores)
+- ✅ Testabilidade (especialista testável isoladamente)
+
+### Padrão 4: Database Views for Business Logic
+
+**Quando usar**:
+- Lógica complexa usada em múltiplos lugares
+- Agregações/filtros que mudam frequentemente
+- Necessidade de testar lógica isoladamente
+
+**Exemplo real**:
+```sql
+CREATE VIEW v_indicators_pending_collection AS
+SELECT id, code, name, source_name, api_endpoint
+FROM indicator_dictionary
+WHERE is_active = true
+  AND collection_method IN ('api', 'scraping')
+  AND (next_collection_date IS NULL
+       OR next_collection_date <= CURRENT_DATE);
+```
+
+**Benefícios**:
+- ✅ Single source of truth (lógica centralizada)
+- ✅ Testável via SQL (sem depender de workflows)
+- ✅ Reutilizável (API, workflows, relatórios usam mesma view)
+- ✅ Performance (views materializadas quando necessário)
+
+### Padrão 5: Workflow Naming Convention
+
+**Problema descoberto**:
+- Arquivo `Tocantins Integrado - Orquestrador.json` (com espaços)
+- Quando segundo orquestrador foi adicionado, houve confusão de nomenclatura
+
+**Solução**:
+- ✅ `{funcao}-{especialidade}.json` para especialistas
+- ✅ `{funcao}-orchestrator.json` para orquestradores
+- ✅ Usar hífens, evitar espaços
+- ❌ Evitar nomes genéricos (`workflow1.json`, `orchestrator-2.json`)
+
+**Exemplo de boa nomenclatura**:
+- `analysis-orchestrator.json`
+- `data-collection-orchestrator.json`
+- `data-collection-ibge.json`
+- `data-collection-inep.json`
+
 ---
 
 ## Desafios e Como o Framework Ajudou
@@ -171,7 +330,7 @@ O projeto nasceu da necessidade de democratizar acesso a indicadores de desenvol
 **Problema**: Após 3-4 horas de código, Dev (IA) começava a "esquecer" decisões iniciais
 
 **Solução via Framework**:
-- Handoffs a cada 1.5-2h forçaram documentação frequente. *Ver, por exemplo, o `Handoff da Sessão 5` que captura o estado exato da implementação dos componentes do dashboard.*
+- Handoffs a cada 1.5-2h forçaram documentação frequente
 - Próxima sessão sempre começava com "ler handoff anterior"
 - Taxa de retrabalho caiu de ~30% (estimativa pré-framework) para ~12%
 
@@ -182,7 +341,7 @@ O projeto nasceu da necessidade de democratizar acesso a indicadores de desenvol
 **Solução via Framework**:
 - Papel de Dev foi limitado a "implementação dentro de spec"
 - Decisões não-triviais geravam "pergunta ao CTO"
-- ADRs garantiram que trade-offs foram conscientes. *A decisão de usar `react-select` em vez de um dropdown nativo, por exemplo, foi documentada num ADR para justificar a adição de uma nova dependência.*
+- ADRs garantiram que trade-offs foram conscientes
 
 ### Desafio 3: CEO Perdendo Visibilidade
 
@@ -198,7 +357,7 @@ O projeto nasceu da necessidade de democratizar acesso a indicadores de desenvol
 **Problema**: Erro de hydration do Next.js levou 3 tentativas para resolver
 
 **Solução via Framework**:
-- Cada tentativa documentada em handoff. *O `Handoff de Debugging do Erro de Hydration` mostra o histórico de 3 tentativas, o que foi crucial para a solução final.*
+- Cada tentativa documentada em handoff
 - Histórico de tentativas evitou repetir soluções fracassadas
 - CTO pôde analisar padrão e sugerir abordagem diferente
 

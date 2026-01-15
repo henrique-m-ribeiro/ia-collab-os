@@ -42,8 +42,6 @@ O **IA Collab OS** é um framework de governança que simula uma estrutura organ
 
 ## Começando
 
-Para um guia prático e rápido, veja o nosso [**QUICKSTART.md**](./QUICKSTART.md).
-
 ### 1. Entenda os Fundamentos
 
 - Leia [PRINCIPLES.md](./PRINCIPLES.md) para compreender os 5 princípios fundamentais
@@ -60,7 +58,16 @@ Para um guia prático e rápido, veja o nosso [**QUICKSTART.md**](./QUICKSTART.m
 - [Handoff Protocol](./protocols/01_HANDOFF_PROTOCOL.md) - Para transições de sessão
 - [ADR Protocol](./protocols/02_ADR_PROTOCOL.md) - Para decisões arquiteturais
 
-### 4. Use os Templates
+### 4. Aprenda Padrões Arquiteturais
+
+- [Architectural Patterns](./PATTERNS.md) - Padrões reutilizáveis descobertos em projetos reais
+  - Metadata-Driven Architecture
+  - Multiple Orchestrators by Responsibility
+  - Orchestrator-Specialist Pattern
+  - Database Views for Business Logic
+  - Workflow Naming Conventions
+
+### 5. Use os Templates
 
 - [Handoff Template](./templates/HANDOFF.md)
 - [ADR Template](./templates/ADR.md)
@@ -69,6 +76,10 @@ Para um guia prático e rápido, veja o nosso [**QUICKSTART.md**](./QUICKSTART.m
 ## Caso de Estudo
 
 Veja [Tocantins Integrado](./case-studies/01_TOCANTINS_INTEGRADO.md) - O projeto que originou este framework, demonstrando aplicação bem-sucedida em um sistema real de superinteligência territorial.
+
+## Exemplos Práticos
+
+- [ADR-004: Metadata-Driven Collection](./examples/adrs/ADR-004-metadata-driven-collection.md) - ADR completo documentando refatoração de sistema hardcoded para metadata-driven, com análise de 3 alternativas e métricas quantitativas de impacto.
 
 ## Quando Usar Este Framework
 
